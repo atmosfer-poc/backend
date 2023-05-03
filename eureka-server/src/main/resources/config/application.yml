@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: ${EUREKA_USERNAME:user}
+      password: ${EUREKA_PASSWORD:12345}
+
+server:
+  port: 9050
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+eureka:
+  instance:
+    appname: eureka-server
+    instance-id: ${spring.application.name}:${random.uuid}
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${EUREKA_USERNAME:user}:${EUREKA_PASSWORD:12345}@${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0

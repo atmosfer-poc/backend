@@ -1,0 +1,56 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tsabitpoc?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: postgres
+    password: admin
+  sql:
+    init:
+      mode: never
+  mail:
+    host: csmtp.yaanimail.com
+    port: 587
+    username: ENC(uasjo+dPTdFlGS2bk9S4jjTJeFvD6K29E5fmFWdj3P8=)
+    password: EgS7TOqB.
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: csmtp.yaanimail.com
+  jpa:
+    show-sql: false
+
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  server:
+    host: localhost
+    port: 9050
+    username: ENC(f8tByks48wy5jecXO8GWtg==)
+    password: ENC(dDorWPQjz8oCQzhwLTus8g==)
+
+kafka:
+  mock: true
+
+task:
+  schedule:
+    account-status-cron: 0 5 0 * * *
+    async-process-cron: '* */30 * * * ?'
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+integration:
+  disable-ssl-hostnames:
+    - adminpanel.yposta.net
+    - testadminpanelapi.yposta.net
+    - admin.yaani.local
+    - partneradmin.yaani.local
+    - apigwtst.turkcell.com.tr
+
+encryption:
+  enc-key: 8CA2ED7FE393CE9CA2BBABA446449C

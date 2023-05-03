@@ -1,0 +1,13 @@
+eureka:
+  instance:
+    prefer-ip-address: false
+  server:
+    host: localhost
+    port: 9050
+    username: user
+    password: 12345
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

@@ -1,0 +1,1 @@
+delete from system_parameters where key='LDAP_DOMAIN_CHECK';

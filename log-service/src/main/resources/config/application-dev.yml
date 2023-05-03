@@ -1,0 +1,56 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  data:
+    mongodb:
+      uri: mongodb://root:poclocaldb@localhost:27017/admin
+  sql:
+    init:
+      mode: never
+  mail:
+    host: csmtp.yaanimail.com
+    port: 587
+    username: ENC(uasjo+dPTdFlGS2bk9S4jjTJeFvD6K29E5fmFWdj3P8=)
+    password: EgS7TOqB.
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: csmtp.yaanimail.com
+  cloud:
+    stream:
+      binders:
+        kafka-binder-poc:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers:
+                        - localhost:9092
+
+  jpa:
+    show-sql: false
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  server:
+    host: localhost
+    port: 9050
+    username: ENC(f8tByks48wy5jecXO8GWtg==)
+    password: ENC(dDorWPQjz8oCQzhwLTus8g==)
+
+kafka:
+  mock: true
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+encryption:
+  enc-key: 8CA2ED7FE393CE9CA2BBABA446449C

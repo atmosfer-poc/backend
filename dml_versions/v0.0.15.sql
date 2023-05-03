@@ -1,0 +1,3 @@
+insert into system_parameters (id, created_by, created_date, created_via, enable, is_deleted, last_modified_by,
+                               last_modified_date, last_modified_via, transaction_id, description, key, value)
+values (3, 0, now(), 'SYSTEM', true, false, null, null, null, 0, 'Dbs tarafından account oluşturulması sırasında dbsCustomerId parametresinin zorunlu olup olmaması', 'DBS_CUSTOMER_ID_REQUIRED_WHEN_CREATE_ACCOUNT', 'false');

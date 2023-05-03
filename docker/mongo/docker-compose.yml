@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  mongodb:
+    image: mongo:4.0.2
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=poclocaldb
+    volumes:
+      - /Users/bkocoglu/docker/volumes/mongo/poc/data/db:/data/db/
+      - /Users/bkocoglu/docker/volumes/mongo/poc/data/configdb:/data/configdb/

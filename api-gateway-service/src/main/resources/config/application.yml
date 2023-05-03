@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: gateway-service
+  main:
+    web-application-type: reactive
+  datasource:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    dbcp2:
+      test-while-idle: true
+      validationQuery: SELECT 1
+      timeBetweenEvictionRunsMillis: 60000
+    tomcat:
+      max-wait: 15000
+      max-active: 50
+      test-on-borrow: true
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      connection.characterEncoding: utf-8
+      connection.CharSet: utf-8
+      connection.useUnicode: true
+      hibernate.jdbc.time_zone: UTC
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  cloud:
+    gateway:
+      routes:
+        - id: accountModule
+          uri: lb://ACCOUNT-SERVICE
+          predicates:
+            - Path=/api/account-service/**
+          filters:
+            - RewritePath=/api/account-service, /
+        - id: apiDocumentationModule
+          uri: lb://API-DOCUMENTATION-SERVICE
+          predicates:
+            - Path=/api/api-documentation-service/**
+          filters:
+            - RewritePath=/api/api-documentation-service, /
+        - id: cardModule
+          uri: lb://CARD-SERVICE
+          predicates:
+            - Path=/api/card-service/**
+          filters:
+            - RewritePath=/api/card-service, /
+        - id: productModule
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/product-service/**
+          filters:
+            - RewritePath=/api/product-service, /
+    stream:
+      bindings:
+        log-output-channel:
+          destination: log
+          binder: kafka-binder-poc
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: true
+  error:
+    include-stacktrace: never
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.username}:${eureka.server.password}@${eureka.server.host}:${eureka.server.port}/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+security:
+  access-token-minutes: 5
+  refresh-token-minutes: 90
+  key: testpocsecret

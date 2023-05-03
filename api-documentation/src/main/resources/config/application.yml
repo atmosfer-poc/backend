@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: api-documentation-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+server:
+  port: 9056
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+swagger:
+  config:
+    refresh-rate: 5000
+
+logging:
+  level:
+    root: info
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.username}:${eureka.server.password}@${eureka.server.host}:${eureka.server.port}/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

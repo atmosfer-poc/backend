@@ -1,0 +1,54 @@
+eureka:
+  instance:
+    prefer-ip-address: false
+  server:
+    host: localhost
+    port: 9050
+    username: ENC(f8tByks48wy5jecXO8GWtg==)
+    password: ENC(dDorWPQjz8oCQzhwLTus8g==)
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tsabitpoc?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: postgres
+    password: admin
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowCredentials: true
+            allowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - OPTIONS
+              - PATCH
+              - HEAD
+    stream:
+      binders:
+        kafka-binder-poc:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers:
+                        - localhost:9092
+  jpa:
+    show-sql: false
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+integration:
+  disable-ssl-hostnames:
+    - flexlogin-tst.turkcell.com.tr
+    - apigwtst.turkcell.com.tr

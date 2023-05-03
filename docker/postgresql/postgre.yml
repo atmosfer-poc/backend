@@ -1,0 +1,12 @@
+version: '3'
+services:
+  postgresql:
+    image: postgres:13.7
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=suitdssdbpass
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - '5436:5432'
