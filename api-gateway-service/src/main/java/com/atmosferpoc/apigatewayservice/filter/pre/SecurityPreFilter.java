@@ -39,6 +39,7 @@ public class SecurityPreFilter implements GlobalFilter, Ordered {
                     .mutate()
                     .header(HeaderNameConstants.AUTHENTICATED_USER_ID, String.valueOf(user.getId()))
                     .header(HeaderNameConstants.IS_AUTHENTICATED, Boolean.TRUE.toString())
+                    .header(HeaderNameConstants.AUTHENTICATED_USER_ROLE, String.valueOf(user.getRole().getName()))
                     .build();
 
             return chain.filter(exchange.mutate().request(request).build());

@@ -1,10 +1,8 @@
 package com.atmosferpoc.core.util;
 
-import com.atmosferpoc.core.model.pojo.AuthenticationInfo;
-import com.atmosferpoc.core.model.type.ChannelType;
 import com.atmosferpoc.core.constant.HeaderNameConstants;
-import com.atmosferpoc.core.exception.ErrorStatusCode;
-import com.atmosferpoc.core.exception.GeneralException;
+import com.atmosferpoc.core.model.pojo.AuthenticationInfo;
+import com.atmosferpoc.core.model.type.RoleType;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,18 +23,15 @@ public class SecurityUtil {
         HttpServletRequest request = attributes.getRequest();
 
         String loggedUserIdStr = request.getHeader(HeaderNameConstants.AUTHENTICATED_USER_ID);
-        String loggedAccountIdStr = request.getHeader(HeaderNameConstants.AUTHENTICATED_ACCOUNT_ID);
         String transactionId = request.getHeader(HeaderNameConstants.TRANSACTION_ID);
         String isAuthenticatedStr = request.getHeader(HeaderNameConstants.IS_AUTHENTICATED);
-        String requestedChannelIdStr = request.getHeader(HeaderNameConstants.AUTHENTICATED_CHANNEL_ID);
+        String requestedUserRoleStr = request.getHeader(HeaderNameConstants.AUTHENTICATED_USER_ROLE);
 
         var authenticationInfo = new AuthenticationInfo();
         authenticationInfo.setTransactionId(transactionId);
         if (StringUtils.isBlank(isAuthenticatedStr)) {
             authenticationInfo.setAuthenticated(false);
-            authenticationInfo.setRequestedChannelId(Optional.empty());
             authenticationInfo.setLoggedUserId(Optional.empty());
-            authenticationInfo.setLoggedAccountId(Optional.empty());
             return authenticationInfo;
         } else {
             authenticationInfo.setAuthenticated(Boolean.parseBoolean(isAuthenticatedStr));
@@ -48,25 +43,14 @@ public class SecurityUtil {
             authenticationInfo.setLoggedUserId(Optional.of(Long.parseLong(loggedUserIdStr)));
         }
 
-        if (StringUtils.isBlank(loggedAccountIdStr) || loggedAccountIdStr.equals("null")) {
-            authenticationInfo.setLoggedAccountId(Optional.empty());
-        } else {
-            authenticationInfo.setLoggedAccountId(Optional.of(Long.parseLong(loggedAccountIdStr)));
-        }
-
-        if (StringUtils.isBlank(requestedChannelIdStr)) {
-            authenticationInfo.setRequestedChannelId(Optional.empty());
-        } else {
-            authenticationInfo.setRequestedChannelId(Optional.of(Long.parseLong(requestedChannelIdStr)));
-        }
-
+        authenticationInfo.setUserRole(RoleType.valueOf(requestedUserRoleStr));
         return authenticationInfo;
     }
 
-    public static ChannelType getChannel() {
-        var authenticationInfo = getAuthenticationInfo();
-        Long channelId = authenticationInfo.getRequestedChannelId().orElse(ChannelType.DBS.getId());
-        return ChannelType.fromId(channelId);
+    public static RoleType getRole() {
+        AuthenticationInfo authenticationInfo = getAuthenticationInfo();
+
+        return authenticationInfo.getUserRole();
     }
 
     public static String getTransactionId() {
@@ -90,16 +74,5 @@ public class SecurityUtil {
         HttpServletRequest request = attributes.getRequest();
         String isMobilStr = request.getHeader(HeaderNameConstants.IS_MOBIL);
         return Boolean.parseBoolean(isMobilStr);
-    }
-
-    public static Long getLoggerAccountId() {
-        var authenticationInfo = getAuthenticationInfo();
-        Optional<Long> loggedAccountId = authenticationInfo.getLoggedAccountId();
-
-        if (loggedAccountId.isEmpty()) {
-            throw new GeneralException(ErrorStatusCode.REQUIRE_LOGGED_ACCOUNT_ID);
-        }
-
-        return loggedAccountId.get();
     }
 }

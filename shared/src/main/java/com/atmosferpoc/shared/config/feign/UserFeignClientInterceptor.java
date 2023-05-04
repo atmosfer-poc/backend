@@ -22,9 +22,9 @@ public class UserFeignClientInterceptor implements RequestInterceptor {
 
         template.header(HeaderNameConstants.TRANSACTION_ID, currentRequest.getHeader(HeaderNameConstants.TRANSACTION_ID));
         template.header(HeaderNameConstants.TRANSACTION_TIME, currentRequest.getHeader(HeaderNameConstants.TRANSACTION_TIME));
-        template.header(HeaderNameConstants.AUTHENTICATED_CHANNEL_ID, currentRequest.getHeader(HeaderNameConstants.AUTHENTICATED_CHANNEL_ID));
         template.header(HeaderNameConstants.AUTHENTICATED_USER_ID, currentRequest.getHeader(HeaderNameConstants.AUTHENTICATED_USER_ID));
-        template.header(HeaderNameConstants.AUTHENTICATED_ACCOUNT_ID, currentRequest.getHeader(HeaderNameConstants.AUTHENTICATED_ACCOUNT_ID));
         template.header(HeaderNameConstants.IS_AUTHENTICATED, currentRequest.getHeader(HeaderNameConstants.IS_AUTHENTICATED));
+        template.header(HeaderNameConstants.IS_MOBIL, currentRequest.getHeader(HeaderNameConstants.IS_MOBIL));
+        template.header(HeaderNameConstants.AUTHENTICATED_USER_ROLE, currentRequest.getHeader(HeaderNameConstants.AUTHENTICATED_USER_ROLE));
     }
 }

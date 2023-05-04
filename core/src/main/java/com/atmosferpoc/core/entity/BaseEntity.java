@@ -46,10 +46,6 @@ public abstract class BaseEntity implements Serializable {
     private Long lastModifiedBy;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private SourceVia createdVia;
-
-    @Enumerated(EnumType.STRING)
     private SourceVia lastModifiedVia;
 
     private boolean enable = true;
@@ -72,12 +68,6 @@ public abstract class BaseEntity implements Serializable {
             this.createdBy = authenticationInfo.getLoggedUserId().get();
         } else {
             this.createdBy = 0L;
-        }
-
-        if (authenticationInfo.getRequestedChannelId().isPresent()) {
-            this.createdVia = SourceVia.fromId(authenticationInfo.getRequestedChannelId().get());
-        } else {
-            this.createdVia = SourceVia.SYSTEM;
         }
 
         this.transactionId = authenticationInfo.getTransactionId();

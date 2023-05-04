@@ -43,10 +43,6 @@ public abstract class BaseWebLogger {
         return Objects.requireNonNullElse(headers.get(HeaderNameConstants.TRANSACTION_ID), "");
     }
 
-    protected String getChannelId() {
-        return Objects.requireNonNullElse(headers.get(HeaderNameConstants.AUTHENTICATED_CHANNEL_ID), "5");
-    }
-
     protected Long getUserId() {
         String userIdStr = headers.get(HeaderNameConstants.AUTHENTICATED_USER_ID);
 

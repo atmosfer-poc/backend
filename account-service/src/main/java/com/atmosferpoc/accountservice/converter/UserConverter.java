@@ -49,6 +49,7 @@ public class UserConverter implements BaseConverter<UserDto, User, UserResource>
         user.setName(entity.getName());
         user.setLastName(entity.getSurname());
         user.setDateOfBirth(entity.getDateOfBirth());
+        user.setRole(entity.getRole().getName());
 
         return user;
     }

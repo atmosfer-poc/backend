@@ -4,7 +4,11 @@ import com.atmosferpoc.accountservice.converter.UserConverter;
 import com.atmosferpoc.accountservice.service.UserService;
 import com.atmosferpoc.core.controller.AbstractEntityController;
 import com.atmosferpoc.core.converter.BaseConverter;
+import com.atmosferpoc.core.exception.ErrorStatusCode;
+import com.atmosferpoc.core.exception.GeneralException;
+import com.atmosferpoc.core.model.type.RoleType;
 import com.atmosferpoc.core.service.BaseEntityService;
+import com.atmosferpoc.core.util.SecurityUtil;
 import com.atmosferpoc.entity.User;
 import com.atmosferpoc.shared.endpoints.AccountEndpoints;
 import com.atmosferpoc.shared.model.dto.EmailDto;
@@ -19,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(AccountEndpoints.USERS)
@@ -52,6 +59,15 @@ public class UserController extends AbstractEntityController<UserDto, User, User
     @PutMapping(AccountEndpoints.USER_PWD_RESET_CONFIRM)
     public void confirmPwdReset(@PathVariable String token, @RequestBody @Valid PasswordDto dto) {
         userService.confirmPwdReset(token, dto.getPassword());
+    }
+
+    @GetMapping("all")
+    @Override
+    public List<UserResource> all(boolean isExistAudit) {
+        if (!Objects.equals(RoleType.ADMIN, SecurityUtil.getRole())) {
+            throw new GeneralException(ErrorStatusCode.UNEXPECTED_EXCEPTION, "Unauthorize !");
+        }
+        return super.all(isExistAudit).stream().filter(u -> !Objects.equals(u.getRole(), RoleType.APPLIER)).collect(Collectors.toList());
     }
 
     @Override

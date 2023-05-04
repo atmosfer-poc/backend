@@ -13,8 +13,6 @@ public class RequestParameters extends LogParameters {
 
     private String path;
 
-    private String channelId;
-
     private String client;
 
     private HttpMethod httpMethod;

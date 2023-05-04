@@ -48,7 +48,6 @@ public class LogServiceImpl implements LogService {
         log.setRequest(parameters.getRequest());
         log.setPath(parameters.getPath());
         log.setTransactionId(parameters.getTrxId());
-        log.setCreatedVia(SourceVia.fromId(Long.valueOf(parameters.getChannelId())));
         log.setClient(parameters.getClient());
         log.setRequestHeaders(parameters.getHeaders());
         log.setHttpMethod(parameters.getHttpMethod());
