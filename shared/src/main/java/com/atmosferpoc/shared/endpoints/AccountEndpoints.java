@@ -9,7 +9,10 @@ public class AccountEndpoints extends BaseEndpoints {
     public static final String SCHEDULER_TRIGGER = BASE + "/scheduler-trigger";
     public static final String SCHEDULER_TRIGGER_ACCOUNT_STATUS = "/account-status";
     public static final String USERS = BASE + "/users";
-    public static final String USER_SEARCH =  "/search";
+    public static final String USER_ACTIVATE =  "/activate/{token}";
+    public static final String USER_PWD_RESET =  "/password-reset";
+    public static final String USER_PWD_RESET_CHECK_TOKEN =  "/password-reset/check-token/{token}";
+    public static final String USER_PWD_RESET_CONFIRM =  "/password-reset/confirm/{token}";
     public static final String TEST = BASE + "/test";
     public static final String TEST_MAIL = "/mail/{email}";
     public static final String TEST_DOMAIN_UPDATE = "/domain-update";

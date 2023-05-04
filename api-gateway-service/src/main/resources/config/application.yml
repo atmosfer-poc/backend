@@ -12,6 +12,10 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+      maximum-pool-size: 10
+      connection-timeout: 50000
+      idle-timeout: 900000
+      max-lifetime: 2100000
     dbcp2:
       test-while-idle: true
       validationQuery: SELECT 1

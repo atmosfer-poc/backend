@@ -26,9 +26,6 @@ public class Token extends BaseEntity {
     @Column(nullable = false)
     private String refreshToken;
 
-    @Enumerated(EnumType.STRING)
-    private TokenType type;
-
     private Long userId;
 
     @Column(columnDefinition = "integer default 0")

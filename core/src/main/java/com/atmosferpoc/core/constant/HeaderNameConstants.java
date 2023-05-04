@@ -12,4 +12,5 @@ public class HeaderNameConstants {
     public static final String AUTHENTICATED_USER_ID = "x-authenticated-user-id";
     public static final String AUTHENTICATED_ACCOUNT_ID = "x-authenticated-account-id";
     public static final String IS_AUTHENTICATED = "x-is-authenticated";
+    public static final String IS_MOBIL = "x-is-mobile";
 }

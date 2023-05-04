@@ -6,11 +6,12 @@ import lombok.Getter;
 
 @Getter
 public enum RoleType {
-    USER(1L),
+    APPLIER(1L),
     ADMIN(2L),
-    BUSINESS(3L),
-    TENANT_MANAGER(4L),
-    BLOCKED(5L);
+    HR(3L),
+    TECHNICAL(4L),
+    FINANCE(5L),
+    UNASSIGNED(6L);
 
     private final Long id;
 

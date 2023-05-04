@@ -31,14 +31,9 @@ public class BearerAuthenticationApplier extends AuthenticationApplier {
             return Optional.empty();
         }
 
-        var tokenType = tokenValidateResult.get().getTokenType();
         Long userId = tokenValidateResult.get().getUserId();
 
-        if (Objects.equals(tokenType, TokenType.PORTAL)) {
-            return userRepository.findById(userId);
-        } else {
-            return Optional.empty();
-        }
+        return userRepository.findById(userId);
     }
 
     private Optional<TokenValidateResult> validateToken(ServerHttpRequest request) {
@@ -71,7 +66,6 @@ public class BearerAuthenticationApplier extends AuthenticationApplier {
 
         return Optional.of(TokenValidateResult
                 .builder()
-                .tokenType(TokenType.PORTAL)
                 .userId(userId)
                 .build()
         );

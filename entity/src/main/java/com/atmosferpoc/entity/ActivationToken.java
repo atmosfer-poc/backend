@@ -6,24 +6,22 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-public class CardItem extends BaseEntity {
-    private int count;
-
+public class ActivationToken extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
+    private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "card_id")
-    private Card card;
+    private String token;
+
+    private LocalDateTime expireTime;
 
     @Override
     public <T extends BaseEntity> void update(T entity) {
-
+        throw new UnsupportedOperationException();
     }
 }

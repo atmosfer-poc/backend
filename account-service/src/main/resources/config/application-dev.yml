@@ -1,23 +1,12 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tsabitpoc?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-    username: postgres
-    password: admin
+    url: jdbc:postgresql://185.126.217.205:5432/postgres?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: omreon
+    password: root
   sql:
     init:
       mode: never
-  mail:
-    host: csmtp.yaanimail.com
-    port: 587
-    username: ENC(uasjo+dPTdFlGS2bk9S4jjTJeFvD6K29E5fmFWdj3P8=)
-    password: EgS7TOqB.
-    protocol: smtp
-    tls: true
-    properties.mail.smtp:
-      auth: true
-      starttls.enable: true
-      ssl.trust: csmtp.yaanimail.com
   jpa:
     show-sql: false
 

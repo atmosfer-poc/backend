@@ -9,9 +9,9 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tsabitpoc?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-    username: postgres
-    password: admin
+    url: jdbc:postgresql://185.126.217.205:5432/postgres?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: omreon
+    password: root
   cloud:
     gateway:
       globalcors:
@@ -39,7 +39,7 @@ spring:
                   kafka:
                     binder:
                       brokers:
-                        - localhost:9092
+                        - 185.126.217.205:9092
   jpa:
     show-sql: false
 

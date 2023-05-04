@@ -8,6 +8,5 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Claims {
-    private TokenType tokenType;
     private Long userId;
 }

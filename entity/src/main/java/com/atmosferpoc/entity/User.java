@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -36,8 +37,7 @@ public class User extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Card card;
+    private LocalDate dateOfBirth;
 
     @Override
     public <T extends BaseEntity> void update(T entity) {
@@ -61,6 +61,14 @@ public class User extends BaseEntity {
 
         if (Objects.nonNull(user.getEmail())) {
             email = user.getEmail();
+        }
+
+        if (Objects.nonNull(user.getPassword())) {
+            password = user.getPassword();
+        }
+
+        if (Objects.nonNull(user.getStatus())) {
+            status = user.getStatus();
         }
     }
 

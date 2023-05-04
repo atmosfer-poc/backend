@@ -11,4 +11,14 @@ public interface UserService extends BaseEntityService<User, Long> {
     Optional<User> find(String username, String password);
 
     void checkDefaultUsers();
+
+    Optional<User> findActive(String username, String password);
+
+    void activate(String token);
+
+    void passwordReset(String email);
+
+    User checkPwdResetToken(String token);
+
+    void confirmPwdReset(String token, String password);
 }

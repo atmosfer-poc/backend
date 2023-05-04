@@ -7,8 +7,7 @@ import lombok.Getter;
 @Getter
 public enum UserStatusType {
     ACTIVE(1L,"1"),
-    DELETED(3L,"0"),
-    DEACTIVE(2L,"2");
+    PASSIVE(2L,"0");
 
     private final Long id;
     private final String displayId;

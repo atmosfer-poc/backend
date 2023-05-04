@@ -3,6 +3,7 @@ package com.atmosferpoc.accountservice.converter;
 import com.atmosferpoc.core.converter.BaseConverter;
 import com.atmosferpoc.core.model.type.RoleType;
 import com.atmosferpoc.core.model.type.UserStatusType;
+import com.atmosferpoc.core.util.SecurityUtil;
 import com.atmosferpoc.entity.Role;
 import com.atmosferpoc.entity.User;
 import com.atmosferpoc.entity.UserStatus;
@@ -47,6 +48,7 @@ public class UserConverter implements BaseConverter<UserDto, User, UserResource>
         user.setMsisdn(entity.getMsisdn());
         user.setName(entity.getName());
         user.setLastName(entity.getSurname());
+        user.setDateOfBirth(entity.getDateOfBirth());
 
         return user;
     }
@@ -60,15 +62,21 @@ public class UserConverter implements BaseConverter<UserDto, User, UserResource>
         user.setEmail(dto.getEmail());
 
         UserStatus userStatus = new UserStatus();
-        userStatus.setId(UserStatusType.ACTIVE.getId());
-        userStatus.setName(UserStatusType.ACTIVE);
+        userStatus.setId(UserStatusType.PASSIVE.getId());
+        userStatus.setName(UserStatusType.PASSIVE);
 
         user.setStatus(userStatus);
+        user.setDateOfBirth(dto.getDateOfBirth());
 
         Role role = new Role();
-        role.setName(RoleType.USER);
-        role.setId(RoleType.USER.getId());
 
+        if (SecurityUtil.sourceIsMobil()) {
+            role.setName(RoleType.APPLIER);
+            role.setId(RoleType.APPLIER.getId());
+        } else {
+            role.setName(RoleType.UNASSIGNED);
+            role.setId(RoleType.UNASSIGNED.getId());
+        }
         user.setRole(role);
 
         return user;

@@ -11,6 +11,7 @@ import java.util.Optional;
 @ToString
 public class AuthenticationInfo {
     private boolean isAuthenticated;
+    private boolean isMobil;
     private String transactionId;
     private Optional<Long> loggedUserId;
     private Optional<Long> loggedAccountId;

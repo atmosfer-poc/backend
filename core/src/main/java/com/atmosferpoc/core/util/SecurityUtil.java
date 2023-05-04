@@ -85,6 +85,13 @@ public class SecurityUtil {
         return loggedUserId.get();
     }
 
+    public static boolean sourceIsMobil() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        String isMobilStr = request.getHeader(HeaderNameConstants.IS_MOBIL);
+        return Boolean.parseBoolean(isMobilStr);
+    }
+
     public static Long getLoggerAccountId() {
         var authenticationInfo = getAuthenticationInfo();
         Optional<Long> loggedAccountId = authenticationInfo.getLoggedAccountId();

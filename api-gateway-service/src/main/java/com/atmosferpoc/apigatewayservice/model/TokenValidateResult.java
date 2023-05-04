@@ -9,6 +9,5 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TokenValidateResult {
-    private TokenType tokenType;
     private Long userId;
 }

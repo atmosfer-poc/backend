@@ -17,7 +17,7 @@ public class TokenGenerator {
 
     public TokenResource generateToken(Claims settings) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("type", settings.getTokenType());
+        claims.put("userId", settings.getUserId());
         return doGenerateToken(claims, String.valueOf(settings.getUserId()));
     }
 

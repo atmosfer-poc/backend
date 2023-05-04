@@ -12,10 +12,15 @@ import java.util.List;
 @Setter
 @Builder
 public class TokenResource {
+    private boolean requireOtp;
     private String accessToken;
     private String refreshToken;
     private Date accessTokenExpirationDate;
     private List<String> scope = new ArrayList<>();
     private String type;
     private boolean mustEula;
+
+    public static TokenResource requireOtpResult() {
+        return TokenResource.builder().requireOtp(true).build();
+    }
 }
