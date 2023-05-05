@@ -115,6 +115,7 @@
 		<module>api-documentation</module>
 		<module>log-service</module>
 		<module>advertisement-service</module>
-	</modules>
+        <module>application-service</module>
+    </modules>
 
 </project>

@@ -56,12 +56,12 @@ spring:
             - Path=/api/advertisement-service/**
           filters:
             - RewritePath=/api/advertisement-service, /
-        - id: productModule
-          uri: lb://PRODUCT-SERVICE
+        - id: applicationModule
+          uri: lb://APPLICATION-SERVICE
           predicates:
-            - Path=/api/product-service/**
+            - Path=/api/application-service/**
           filters:
-            - RewritePath=/api/product-service, /
+            - RewritePath=/api/application-service, /
     stream:
       bindings:
         log-output-channel:
