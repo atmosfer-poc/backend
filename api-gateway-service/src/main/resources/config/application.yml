@@ -50,12 +50,12 @@ spring:
             - Path=/api/api-documentation-service/**
           filters:
             - RewritePath=/api/api-documentation-service, /
-        - id: cardModule
-          uri: lb://CARD-SERVICE
+        - id: advertisementModule
+          uri: lb://ADVERTISEMENT-SERVICE
           predicates:
-            - Path=/api/card-service/**
+            - Path=/api/advertisement-service/**
           filters:
-            - RewritePath=/api/card-service, /
+            - RewritePath=/api/advertisement-service, /
         - id: productModule
           uri: lb://PRODUCT-SERVICE
           predicates:
@@ -91,6 +91,6 @@ jasypt:
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
 
 security:
-  access-token-minutes: 5
+  access-token-minutes: 180
   refresh-token-minutes: 90
   key: testpocsecret

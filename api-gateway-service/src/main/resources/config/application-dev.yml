@@ -48,7 +48,3 @@ jasypt:
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
 
-integration:
-  disable-ssl-hostnames:
-    - flexlogin-tst.turkcell.com.tr
-    - apigwtst.turkcell.com.tr

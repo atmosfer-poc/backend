@@ -84,12 +84,6 @@ public abstract class BaseEntity implements Serializable {
         } else {
             this.lastModifiedBy = 0L;
         }
-
-        if (authenticationInfo.getRequestedChannelId().isPresent()) {
-            this.lastModifiedVia = SourceVia.fromId(authenticationInfo.getRequestedChannelId().get());
-        } else {
-            this.lastModifiedVia = SourceVia.SYSTEM;
-        }
     }
 
     public abstract <T extends BaseEntity> void update(T entity);

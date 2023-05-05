@@ -1,6 +1,6 @@
 spring:
   application:
-    name: account-service
+    name: advertisement-service
   datasource:
     hikari:
       poolName: Hikari
@@ -10,10 +10,6 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
-      maximum-pool-size: 10
-      connection-timeout: 50000
-      idle-timeout: 900000
-      max-lifetime: 2100000
     dbcp2:
       test-while-idle: true
       validationQuery: SELECT 1
@@ -39,7 +35,7 @@ spring:
           entity_copy_observer: allow
 
 server:
-  port: 9051
+  port: 9052
   servlet:
     session:
       cookie:
@@ -58,9 +54,3 @@ jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
-security:
-  access-token-minutes: 180
-  refresh-token-minutes: 90
-  key: testpocsecret
-

@@ -109,13 +109,12 @@
 		<module>core</module>
 		<module>entity</module>
 		<module>shared</module>
-		<module>integration</module>
         <module>eureka-server</module>
         <module>account-service</module>
 		<module>api-gateway-service</module>
 		<module>api-documentation</module>
 		<module>log-service</module>
-		<module>card-service</module>
+		<module>advertisement-service</module>
 	</modules>
 
 </project>

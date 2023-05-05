@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 @Slf4j
 @UtilityClass
@@ -44,7 +45,8 @@ public class IOHelper {
         }
     }
 
-    public byte[] readAsBase64(String path) throws IOException {
-        return FileUtils.readFileToByteArray(new File(path));
+    public String readAsBase64(String path) throws IOException {
+        byte[] fileContent = FileUtils.readFileToByteArray(new File(path));
+        return Base64.getEncoder().encodeToString(fileContent);
     }
 }

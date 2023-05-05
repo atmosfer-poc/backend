@@ -17,7 +17,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 })
 @ComponentScan({
         "com.atmosferpoc.shared.config.properties",
-        "com.atmosferpoc.integration",
         "com.atmosferpoc.apigatewayservice",
         "com.atmosferpoc.core.exception"
 })
