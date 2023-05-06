@@ -15,9 +15,4 @@ public class AdvertisementApplyDto extends BaseEntityDto {
     private String city;
     private String phoneNumber;
     private String workType;
-
-    @Override
-    public void validate() {
-        super.validate();
-    }
 }

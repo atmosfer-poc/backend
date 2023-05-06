@@ -2,7 +2,6 @@ package com.atmosferpoc.entity;
 
 import com.atmosferpoc.core.entity.BaseEntity;
 import com.atmosferpoc.shared.model.type.ApplicationAction;
-import com.atmosferpoc.shared.model.type.ApplicationStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.util.Objects;
 
 @Entity
 @Getter

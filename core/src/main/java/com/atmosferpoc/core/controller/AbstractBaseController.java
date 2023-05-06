@@ -25,7 +25,7 @@ public abstract class AbstractBaseController<D extends BaseEntityDto, E extends 
     protected List<R> toResource(List<E> all) {
         return !all.isEmpty() ? (List<R>) all.stream().map(e ->
                 (BaseEntityResource) toResource(e)
-        ).collect(Collectors.toList()) : Collections.emptyList();
+        ).toList() : Collections.emptyList();
     }
 
     protected R toResource(E entity) {
@@ -37,7 +37,7 @@ public abstract class AbstractBaseController<D extends BaseEntityDto, E extends 
     }
 
     protected List<E> toEntity(List<D> all) {
-        return !all.isEmpty() ? all.stream().map(this::toEntity).collect(Collectors.toList()) : null;
+        return !all.isEmpty() ? all.stream().map(this::toEntity).toList() : null;
     }
 
     protected E toEntity(D dto) {
@@ -50,12 +50,8 @@ public abstract class AbstractBaseController<D extends BaseEntityDto, E extends 
 
 
     protected void clearAuditing(R resource) {
-        // if (Objects.nonNull(resource))
-            // resource.clearAudit();
     }
 
     protected void clearAuditing(List<R> resources) {
-        // if (Objects.nonNull(resources))
-            // resources.forEach(BaseEntityResource::clearAudit);
     }
 }

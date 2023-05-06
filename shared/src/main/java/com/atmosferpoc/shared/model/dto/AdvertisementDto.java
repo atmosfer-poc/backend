@@ -17,9 +17,4 @@ public class AdvertisementDto extends BaseEntityDto {
 
     @JsonIgnore
     private String filePath;
-
-    @Override
-    public void validate() {
-        super.validate();
-    }
 }

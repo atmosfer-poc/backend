@@ -78,7 +78,7 @@ public abstract class AbstractReadEntityController<D extends BaseEntityDto, E ex
 
     private PageImpl<R> preparePageableResponse(PageImpl<E> resultEntityPage, Pageable pageable, boolean isExistAudit) {
         List<E> resultEntities = resultEntityPage.getContent();
-        List<R> resultResources = resultEntities.stream().map(this::toResource).collect(Collectors.toList());
+        List<R> resultResources = resultEntities.stream().map(this::toResource).toList();
         if (!isExistAudit)
             clearAuditing(resultResources);
         return new PageImpl<>(resultResources, pageable, resultEntityPage.getTotalElements());
