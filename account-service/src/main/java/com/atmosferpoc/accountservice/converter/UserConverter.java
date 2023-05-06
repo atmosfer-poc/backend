@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -44,10 +45,11 @@ public class UserConverter implements BaseConverter<UserDto, User, UserResource>
     @Override
     public UserResource toResource(User entity) {
         UserResource user = new UserResource();
+        user.setId(entity.getId());
         user.setEmail(entity.getEmail());
         user.setMsisdn(entity.getMsisdn());
         user.setName(entity.getName());
-        user.setLastName(entity.getSurname());
+        user.setSurname(entity.getSurname());
         user.setDateOfBirth(entity.getDateOfBirth());
         user.setRole(entity.getRole().getName());
 
@@ -62,23 +64,35 @@ public class UserConverter implements BaseConverter<UserDto, User, UserResource>
         user.setPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
 
-        UserStatus userStatus = new UserStatus();
-        userStatus.setId(UserStatusType.PASSIVE.getId());
-        userStatus.setName(UserStatusType.PASSIVE);
+        if (Objects.isNull(dto.getId())) {
+            UserStatus userStatus = new UserStatus();
+            userStatus.setId(UserStatusType.PASSIVE.getId());
+            userStatus.setName(UserStatusType.PASSIVE);
 
-        user.setStatus(userStatus);
+            user.setStatus(userStatus);
+        }
+
+
         user.setDateOfBirth(dto.getDateOfBirth());
 
-        Role role = new Role();
+        if (Objects.isNull(dto.getRole())) {
+            Role role = new Role();
 
-        if (SecurityUtil.sourceIsMobil()) {
-            role.setName(RoleType.APPLIER);
-            role.setId(RoleType.APPLIER.getId());
+            if (SecurityUtil.sourceIsMobil()) {
+                role.setName(RoleType.APPLIER);
+                role.setId(RoleType.APPLIER.getId());
+            } else {
+                role.setName(RoleType.UNASSIGNED);
+                role.setId(RoleType.UNASSIGNED.getId());
+            }
+            user.setRole(role);
         } else {
-            role.setName(RoleType.UNASSIGNED);
-            role.setId(RoleType.UNASSIGNED.getId());
+            Role role = new Role();
+            role.setName(dto.getRole());
+            role.setId(dto.getRole().getId());
+
+            user.setRole(role);
         }
-        user.setRole(role);
 
         return user;
     }

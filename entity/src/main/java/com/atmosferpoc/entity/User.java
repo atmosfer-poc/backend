@@ -68,7 +68,10 @@ public class User extends BaseEntity {
         }
 
         if (Objects.nonNull(user.getStatus())) {
-            status = user.getStatus();
+            UserStatus activeStatus = new UserStatus();
+            activeStatus.setId(UserStatusType.ACTIVE.getId());
+            activeStatus.setName(UserStatusType.ACTIVE);
+            status = activeStatus;
         }
     }
 

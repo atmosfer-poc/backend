@@ -14,6 +14,7 @@ import com.atmosferpoc.shared.endpoints.AdvertisementEndpoints;
 import com.atmosferpoc.shared.model.dto.AdvertisementApplyDto;
 import com.atmosferpoc.shared.model.dto.AdvertisementDto;
 import com.atmosferpoc.shared.model.resource.AdvertisementResource;
+import com.atmosferpoc.shared.model.resource.ApplicationResource;
 import com.atmosferpoc.shared.model.resource.IdTitleResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +60,15 @@ public class AdvertisementController extends AbstractEntityController<Advertisem
     @PostMapping(AdvertisementEndpoints.ADVERTISEMENT_APPLY)
     public void applyAdvertisement(@PathVariable Long id, AdvertisementApplyDto dto) {
         service.apply(id, dto, filePath);
+    }
+
+    @GetMapping(AdvertisementEndpoints.ADVERTISEMENT_APPLICATIONS)
+    public List<ApplicationResource> getJobApplications(@PathVariable Long id) {
+        if (!Arrays.asList(RoleType.FINANCE, RoleType.HR, RoleType.TECHNICAL).contains(SecurityUtil.getRole())) {
+            throw new GeneralException(ErrorStatusCode.UNEXPECTED_EXCEPTION, "Unauthorize !");
+        }
+
+        return service.getApplications(id);
     }
 
     @Override

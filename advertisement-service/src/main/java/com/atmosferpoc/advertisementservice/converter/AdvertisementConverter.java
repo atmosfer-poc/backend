@@ -6,9 +6,13 @@ import com.atmosferpoc.shared.model.dto.AdvertisementDto;
 import com.atmosferpoc.shared.model.resource.AdvertisementResource;
 import com.atmosferpoc.shared.util.IOHelper;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
+@Slf4j
 public class AdvertisementConverter implements BaseConverter<AdvertisementDto, JobAdvertisements, AdvertisementResource> {
     @SneakyThrows
     @Override
@@ -18,7 +22,13 @@ public class AdvertisementConverter implements BaseConverter<AdvertisementDto, J
         resource.setContent(entity.getContent());
         resource.setId(entity.getId());
         resource.setTitle(entity.getTitle());
-        resource.setImage(IOHelper.readAsBase64(entity.getImage()));
+        try {
+            resource.setImage(IOHelper.readAsBase64(entity.getImage()));
+        } catch (Exception ex) {
+            log.warn("file not found");
+        }
+        resource.setStatus(entity.getStatus());
+        resource.setApplicationCount(entity.getApplications().size());
 
         return resource;
     }
@@ -27,13 +37,15 @@ public class AdvertisementConverter implements BaseConverter<AdvertisementDto, J
     public JobAdvertisements toEntity(AdvertisementDto dto) {
         JobAdvertisements entity = new JobAdvertisements();
 
-        String fileName = "advertisement-".concat(dto.getTitle().replace(" ", "-"));
+        if (Objects.nonNull(dto.getImage())) {
+            String fileName = "advertisement-".concat(dto.getTitle().replace(" ", "-"));
+            String fileFullPath = IOHelper.save(dto.getImage(), dto.getFilePath(), fileName);
+            entity.setImage(fileFullPath);
+        }
 
-        String fileFullPath = IOHelper.save(dto.getImage(), dto.getFilePath(), fileName);
-
+        entity.setStatus(dto.getStatus());
         entity.setContent(dto.getContent());
         entity.setTitle(dto.getTitle());
-        entity.setImage(fileFullPath);
 
         return entity;
     }

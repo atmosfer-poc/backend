@@ -1,5 +1,6 @@
 package com.atmosferpoc.advertisementservice.service.impl;
 
+import com.atmosferpoc.advertisementservice.converter.AdvertisementApplicationConverter;
 import com.atmosferpoc.advertisementservice.repository.AdvertisementApplicationRepository;
 import com.atmosferpoc.advertisementservice.repository.AdvertisementRepository;
 import com.atmosferpoc.advertisementservice.service.AdvertisementService;
@@ -13,6 +14,7 @@ import com.atmosferpoc.entity.JobAdvertisementApplication;
 import com.atmosferpoc.entity.JobAdvertisements;
 import com.atmosferpoc.entity.User;
 import com.atmosferpoc.shared.model.dto.AdvertisementApplyDto;
+import com.atmosferpoc.shared.model.resource.ApplicationResource;
 import com.atmosferpoc.shared.model.resource.IdTitleResource;
 import com.atmosferpoc.shared.model.type.JobAdvertisementStatus;
 import com.atmosferpoc.shared.util.IOHelper;
@@ -90,5 +92,14 @@ public class AdvertisementServiceImpl extends AbstractEntityService<JobAdvertise
         application.setWorkType(dto.getWorkType());
 
         advertisementApplicationRepository.save(application);
+    }
+
+    @Override
+    public List<ApplicationResource> getApplications(Long id) {
+        return advertisementApplicationRepository
+                .findAllByJobId(id)
+                .stream()
+                .map(AdvertisementApplicationConverter::toResource)
+                .toList();
     }
 }

@@ -8,4 +8,5 @@ public class AdvertisementEndpoints extends BaseEndpoints {
     public static final String ADVERTISEMENT = BASE + "/advertisements";
     public static final String ADVERTISEMENT_SUMMARY_OPEN = "/summary/open";
     public static final String ADVERTISEMENT_APPLY = "{id}/apply";
+    public static final String ADVERTISEMENT_APPLICATIONS = "{id}/applications";
 }

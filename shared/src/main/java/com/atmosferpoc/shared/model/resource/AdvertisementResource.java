@@ -1,6 +1,7 @@
 package com.atmosferpoc.shared.model.resource;
 
 import com.atmosferpoc.core.model.resource.BaseEntityResource;
+import com.atmosferpoc.shared.model.type.JobAdvertisementStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,6 @@ public class AdvertisementResource extends BaseEntityResource {
     private String title;
     private String content;
     private String image;
+    private JobAdvertisementStatus status;
+    private int applicationCount;
 }
